@@ -614,5 +614,17 @@
   "bypass_pickup_location_prompt": "Bypass pickup location prompt when placing holds",
   "always_use_pickup_location": "Always use this pickup location",
   "already_on_hold": "This title is already on hold for you. Are you sure you want to place a duplicate hold?",
-  "campaigns": "Campaigns"
+  "campaigns": "Campaigns",
+  "active_campaigns": "Active Campaigns",
+  "enrolled_campaigns": "Your Campaigns",
+  "past_campaigns": "Past Campaigns",
+  "upcoming_campaigns": "Upcoming Campaigns",
+  "past_enrolled_campaigns": "Your Past Campaigns",
+  "linked_user_campaigns": "Linked User Campaigns",
+  "enroll": "Enroll",
+  "unenroll": "Unenroll",
+  "opt_in_to_campaign_emails": "Opt in to Emails",
+  "opt_out_of_campaign_emails": "Opt out of Emails",
+  "milestone_progress": "Progress",
+  "milestone_reward": "Reward"
 }
