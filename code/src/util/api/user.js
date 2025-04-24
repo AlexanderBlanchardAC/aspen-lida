@@ -1227,7 +1227,8 @@ export async function fetchCampaigns(page = 1, pageSize = 20, filter = 'enrolled
 
      if (response.ok) {
           data = response.data;
-          console.log(data);
+          console.log("Campaigns returned:", data.result?.campaigns); // Logs the campaigns directly
+
           if (data.result?.page_current !== data.result?.page_total) {
                morePages = true;
           }
