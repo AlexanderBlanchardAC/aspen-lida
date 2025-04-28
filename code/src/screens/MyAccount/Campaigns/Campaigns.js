@@ -74,11 +74,6 @@ export const MyCampaigns = () => {
 		queryClient.invalidateQueries(['all_campaigns']);
 	}, [filterBy]);
 
-	const calculateProgress = (completed, total) => {
-		const progressFraction = `${completed}/${total}`;
-		const progressPercentage = total == 0 ? 0 : ((completed / total) * 100).toFixed(2);
-		return { progressFraction, progressPercentage };
-	  };
 
 	const handleEnrollUnenroll = async (item) => {
 		console.log("in func");
@@ -143,12 +138,6 @@ export const MyCampaigns = () => {
 		}
 	}
 	
-	const toggleCampaignInfo = (campaignId) => {
-		setOpenCampaignInfo(prevState => ({
-			...prevState, 
-			[campaignId]: !prevState[campaignId],
-		}));
-	};
 
 	const toggleExpanded = (id) => {
 		setExpandedCampaigns((prev) => ({
@@ -184,20 +173,6 @@ export const MyCampaigns = () => {
 		}, {});
 	}
 
-	const handleToggleEnrollment = () => {
-		console.log('Toggling enrollment for', selectedCampaign?.name);
-		onClose();
-	};
-	
-	const handleToggleNotifications = () => {
-		console.log('Toggling notifications for', selectedCampaign?.name);
-		onClose();
-	};
-	
-	const handleToggleLeaderboard = () => {
-		console.log('Toggling leaderboard for', selectedCampaign?.name);
-		onClose();
-	};
 
 	const handleShareOnSocial = async (imageUrl) => {
 		const fileUri = FileSystem.documentDirectory + 'shared.jpg';
