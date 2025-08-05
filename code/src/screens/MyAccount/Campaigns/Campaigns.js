@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { Platform, SafeAreaView, Share } from "react-native";
+import { SafeAreaView } from "react-native";
 import { 
   Actionsheet, 
   ActionsheetBackdrop,
@@ -35,11 +35,11 @@ import {
 } from '@gluestack-ui/themed';
 import { fetchCampaigns, unenrollCampaign, enrollCampaign, optIntoCampaignEmails, optUserOutOfCampaignLeaderboard, optUserInToCampaignLeaderboard, addActivityProgress } from '../../../util/api/user';
 import { getTermFromDictionary } from '../../../translations/TranslationService';
-import { UserInterfaceIdiom } from 'expo-constants';
+// import { UserInterfaceIdiom } from 'expo-constants';
 import { LanguageContext, LibrarySystemContext, UserContext, ThemeContext } from '../../../context/initialContext';
-import { filter } from 'lodash';
+// import { filter } from 'lodash';
 import { Image } from 'expo-image';
-import { setCurrentClient } from '@sentry/react-native';
+// import { setCurrentClient } from '@sentry/react-native';
 import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
 import PlaceholderImg from '../../../assets/digital-reward-placeholder.png';
@@ -99,8 +99,6 @@ export const MyCampaigns = () => {
 	const buildImageUrl = (imagePath) => {
 		if (!imagePath || !library.baseUrl) return '';
 		return `${library.baseUrl}${imagePath}?v=${Date.now()}`;
-		// return `${library.baseUrl}${imagePath}?v=${Date.now()}`;
-		// return String(library.baseUrl) + String(imagePath);
 	};
 
 	const formatDate = (dateString) => {
@@ -157,7 +155,6 @@ export const MyCampaigns = () => {
 		() => fetchCampaigns(page, PAGE_SIZE, filterBy, library.baseUrl), 
 		{
 			placeholderData: () => ({ campaigns: campaigns}),
-			// initialData: { campaigns: campaigns },
 			keepPreviousData: true,
 			staleTime: 1000,
 			onSuccess: (data) => {
@@ -168,10 +165,6 @@ export const MyCampaigns = () => {
 		  	onSettled: () => setLoading(false),  
 		}
 	);
-
-	// useEffect(() => {
-	// 	queryClient.invalidateQueries(['all_campaigns']);
-	// }, [filterBy]);
 
 	// Action handlers
 	const handleEnrollUnenroll = async () => {
@@ -283,10 +276,9 @@ export const MyCampaigns = () => {
 				);
 			}
 			// Use the placeholder image URL instead
-			actualImageUrl = buildImageUrl(item.badgeImage); // This should now be the placeholder
-			hasImage = true; // Show the placeholder image
+			actualImageUrl = buildImageUrl(item.badgeImage);
+			hasImage = true; 
 		} else {
-			// Original logic for actual images
 			if (type === 'campaign') {
 				hasImage = item.rewardType === 1 && item.rewardExists && item.badgeImage;
 			} else {
@@ -313,7 +305,7 @@ export const MyCampaigns = () => {
 						<RewardImage 
 							imageUrl={actualImageUrl}
 							rewardName={rewardName}
-							canShare={canShare && !item.isPlaceholderImage} // Don't allow sharing placeholders
+							canShare={canShare && !item.isPlaceholderImage}
 							onShare={handleShareOnSocial}
 						/>
 					</>
@@ -322,42 +314,6 @@ export const MyCampaigns = () => {
 		);
 	};
 
-	// const RewardDisplay = ({ item, imageUrl, type = 'campaign' }) => {
-	// 	const displayName = item.displayName === 1;
-	// 	let hasImage;
-
-	// 	if (type === 'campaign') {
-	// 		hasImage = item.rewardType === 1 && item.rewardExists && item.badgeImage;
-	// 	}else{
-	// 		hasImage = item.rewardType === 1 && item.rewardExists && item.rewardImage;
-	// 	}
-	// 	const rewardName = item.rewardName || 'No Reward';
-	// 	const canShare = type === 'campaign' 
-	// 		? (item.campaignRewardGiven || (item.awardAutomatically && item.campaignIsComplete))
-	// 		: type === 'milestone'
-	// 		? (item.milestoneRewardGiven || (item.awardAutomatically && item.milestoneIsComplete))
-	// 		: (item.rewardGiven || (item.awardAutomatically && item.extraCreditActivityComplete));
-
-	// 	return (
-	// 		<Box flex={type === 'campaign' ? 3 : 1}>
-	// 			{displayName && rewardName && (
-	// 				<Text color={textColor}>
-	// 					{rewardName}
-	// 				</Text>
-	// 			)}
-	// 			{hasImage && imageUrl && (
-	// 				<>
-	// 					<RewardImage 
-	// 						imageUrl={imageUrl}
-	// 						rewardName={rewardName}
-	// 						canShare={canShare}
-	// 						onShare={handleShareOnSocial}
-	// 					/>
-	// 				</>
-	// 			)}
-	// 		</Box>
-	// 	);
-	// };
 
 	const ActivityTable = ({ items, title, type, campaignId, linkedUserId, isEnrolled }) => {
 
@@ -467,7 +423,6 @@ export const MyCampaigns = () => {
 
 	const renderCampaignItem = ({ item, onOpenActions, onToggle, expanded }) => {
 
-		// /*if (!item) return null;*/
 		 if (!item) {
     		return null;
   		}
@@ -607,7 +562,6 @@ export const MyCampaigns = () => {
 		</Center>
 	);
 
-	// Memoized values
 	const campaignsData = useMemo(() => data?.campaigns || [], [data]);
 	const groupedCampaigns = useMemo(() => 
 		filterBy === 'linkedUserCampaigns' ? groupByLinkedUser(campaignsData) : {},
