@@ -12,7 +12,7 @@
 		"GOOGLE_SERVICES_JSON": "/"
 	  },
 	  "android": {
-		"resourceClass": "large"
+		"resourceClass": "medium"
 	  },
 	  "ios": {
 		"image": "latest",
@@ -23,7 +23,7 @@
 	  "extends": "production",
 	  "channel": "beta",
 	  "android": {
-		"resourceClass": "large"
+		"resourceClass": "medium"
 	  },
 	  "ios": {
 		"resourceClass": "medium"
@@ -39,7 +39,7 @@
 	  },
 	  "android": {
 		"buildType": "apk",
-		"resourceClass": "large"
+		"resourceClass": "medium"
 	  }
 	},
 	"development": {
