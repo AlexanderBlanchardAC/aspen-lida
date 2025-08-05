@@ -375,6 +375,7 @@ export const DrawerContent = () => {
           return <InvalidCredentials />;
      }
 
+
      return (
           <DrawerContentScrollView>
                <VStack space="4" my="2" mx="1">
@@ -970,28 +971,29 @@ const Campaigns = () => {
      const { user } = React.useContext(UserContext);
 	const { library } = React.useContext(LibrarySystemContext);
 	const { language } = React.useContext(LanguageContext);
-
-     return(
-          <Pressable     
-               px="2"
-               py="3"
-               rounded="md"
-               onPress={() => 
-                    navigateStack('AccountScreenTab', 'MyCampaigns', {
-                         libraryUrl: library.baseUrl,
-                         hasPendingChanges: false,
-                    })
-               }>
-               <HStack space="1" alignItems="center">
-                    <Icon as={MaterialIcons} name="chevron-right" size="7"/>
-                    <VStack w="100%">
-                         <Text fontWeight="500">
-                              {getTermFromDictionary(language, 'campaigns')} {user ? <Text bold>({user.numCampaigns ?? 0})</Text> : null}
-                         </Text>
-                    </VStack>
-               </HStack>
-          </Pressable>
-     );
+     if (library.hasCommunityEngagementEnabled) {
+          return(
+               <Pressable     
+                    px="2"
+                    py="3"
+                    rounded="md"
+                    onPress={() => 
+                         navigateStack('AccountScreenTab', 'MyCampaigns', {
+                              libraryUrl: library.baseUrl,
+                              hasPendingChanges: false,
+                         })
+                    }>
+                    <HStack space="1" alignItems="center">
+                         <Icon as={MaterialIcons} name="chevron-right" size="7"/>
+                         <VStack w="100%">
+                              <Text fontWeight="500">
+                                   {getTermFromDictionary(language, 'campaigns')} {user ? <Text bold>({user.numCampaigns ?? 0})</Text> : null}
+                              </Text>
+                         </VStack>
+                    </HStack>
+               </Pressable>
+          );
+     }
 }
 
 async function getStoredNotifications() {
