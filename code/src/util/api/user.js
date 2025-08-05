@@ -1375,19 +1375,16 @@ export async function fetchCampaigns(page = 1, pageSize = 20, filter = 'enrolled
      });
 
      const response = await api.post('/UserAPI?method=getUserCampaigns', postBody);
-     // console.log("api response: ", response);
      let data = [];
      let morePages = false;
-     // console.log("FULL API response data:", JSON.stringify(response.data, null, 2));
 
      if (response.ok) {
           data = response.data;
-          // console.log("Campaigns returned: ", data.result?.campaigns);
           if (data.result?.page_current !== data.result?.page_total) {
                morePages = true;
           }
      } else {
-          console.log("API ERROR: ", response);
+          console.error("ERROR fetching campaigns: ", response);
      }
 
      return {
@@ -1431,11 +1428,11 @@ export async function enrollCampaign(campaignId, linkedUserId, filter = 'enrolle
           if (data.result && data.result.success) {
                return true;
           } else {
-               console.log('Failed to enroll in campaign: ', data.message);
+               console.error('Failed to enroll in campaign: ', data.message);
                return false;
           }
      } else {
-          console.log(response);
+          console.error(response);
           return false;
      } 
 }
@@ -1470,11 +1467,11 @@ export async function unenrollCampaign(campaignId, linkedUserId, filter = 'enrol
           if (data.result && data.result.success) {
                return true;
           } else {
-               console.log('Failed to unenroll from campaign: ', data.message);
+               console.error('Failed to unenroll from campaign: ', data.message);
                return false;
           }
      } else {
-          console.log(response);
+          console.error(response);
           return false;
      } 
 }
@@ -1513,11 +1510,12 @@ export async function optIntoCampaignEmails(campaignId, linkedUserId, filter = '
           if (data.result && data.result.success) {
                return true;
           } else {
-               console.log('Failed to opt user into campaign emails: ', data.message);
+               console.error('Failed to opt user into campaign emails: ', data.message);
+
                return false;
           }
      } else {
-          console.log(response);
+          console.error(response);
           return false;
      } 
 }
@@ -1552,11 +1550,11 @@ export async function optUserInToCampaignLeaderboard(campaignId, linkedUserId, f
           if (data.result && data.result.success) {
                return true;
           } else {
-               console.log('Failed to enroll in campaign: ', data.message);
+               console.error('Failed to enroll in campaign: ', data.message);
                return false;
           }
      } else {
-          console.log(response);
+          console.error(response);
           return false;
      } 
 }
@@ -1591,11 +1589,11 @@ export async function optUserOutOfCampaignLeaderboard(campaignId, linkedUserId, 
           if (data.result && data.result.success) {
                return true;
           } else {
-               console.log('Failed to enroll in campaign: ', data.message);
+               console.error('Failed to enroll in campaign: ', data.message);
                return false;
           }
      } else {
-          console.log(response);
+          console.error(response);
           return false;
      } 
 }
@@ -1634,11 +1632,11 @@ export async function addActivityProgress(activityId, linkedUserId, activityType
           if (data.result && data.result.success) {
                return true;
           } else {
-               console.log('Failed to add progress: ', data.message);
+               console.error('Failed to add progress: ', data.message);
                return false;
           }
      } else {
-          console.log(response);
+          console.error(response);
           return false;
      } 
 }

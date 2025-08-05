@@ -394,7 +394,6 @@ export const MyCampaigns = () => {
 
 		const shouldDisableButton = (item) =>{
 			if (type === 'milestone') {
-				console.log("===MILESTONE===", item)
 				return item.isComplete && !item.progressBeyondOneHundredPercent;
 			} else if (type === 'activity') {
 				return item.isComplete;
