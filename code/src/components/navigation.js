@@ -31,6 +31,8 @@ import TitleWithLogo from '../components/TitleWithLogo'
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { logDebugMessage, logInfoMessage, logWarnMessage, logErrorMessage } from '../util/logging.js';
+import { trackAppLaunches, trackAppResume } from '../util/analytics';
+import { AppState } from "react-native";
 
 const prefix = Linking.createURL('/');
 logDebugMessage("Linking prefix is " + prefix);
@@ -206,6 +208,9 @@ export function App() {
                               if (result) {
                                    LIBRARY.url = libraryUrl;
                                    logDebugMessage('Connection successful. Continuing...');
+
+                                   await trackAppLaunches(libraryUrl);
+
                               } else {
                                    logWarnMessage('Connection failed, logging out.');
                                    userToken = null;
